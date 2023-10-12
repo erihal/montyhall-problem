@@ -13,15 +13,12 @@ const setupDoors = numberOfDoors => {
 const pickDoor = doors => {
     doors[getRandomDoorId(doors.length)].picked = true
     return doors
-}  
-
-const getPicked = doors => doors.find(door => door.picked)
+}
 
 const removeDoors = doors => {
-    const pickedDoor = getPicked(doors)
-    
+    const pickedDoor = doors.find(door => door.picked)
     const secondDoor = doors.find(x => x.winner === !pickedDoor.winner)
-       
+
     return [pickedDoor, secondDoor]
 }
 
@@ -31,7 +28,7 @@ const winnerIsPicked = doors => doors.find(x => x.winner).picked ? 1 : 0
 
 const runIterations = (iterations, numberOfDoors) => {
     const stats = { wins: 0 }
-    
+
     for (let index = 0; index < iterations; index++) {
         let doors = setupDoors(numberOfDoors)
         doors = pickDoor(doors)
